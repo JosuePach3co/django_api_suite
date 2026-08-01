@@ -50,11 +50,12 @@ class DemoRestApiItem(APIView):
 
         data = request.data
         
-        # Validación obligatoria para PUT (reemplazo completo)
-        if 'name' not in data or 'email' not in data:
-            return Response({'error': 'Faltan campos requeridos para el reemplazo total.'}, status=status.HTTP_400_BAD_REQUEST)
+        if 'id' not in data or 'name' not in data or 'email' not in data:
+            return Response({'error': 'Faltan campos requeridos (id, name, email) para el reemplazo total.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 2. Reemplazar los datos
+        if data['id'] != item_id:
+            return Response({'error': 'El identificador del cuerpo no coincide con la URL.'}, status=status.HTTP_400_BAD_REQUEST)
+
         item['name'] = data['name']
         item['email'] = data['email']
 
