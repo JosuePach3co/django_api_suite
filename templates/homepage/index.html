@@ -1,77 +1,253 @@
 {% load static %}
 <!DOCTYPE html>
-
-<html>
-
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <title>Backend</title>
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación API REST - Proyecto 06</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
-<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="dawm2" /><meta name="readthedocs-version-slug" content="latest" /><meta name="readthedocs-resolver-filename" content="/_downloads/86066345483e4df73bb9af2546b9024a/index.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'sans-serif'], serif: ['Lora', 'serif'] },
+          colors: {
+            navy: '#0B1F3A', brand: { DEFAULT: '#0057B8', light: '#1A6FD4' },
+            teal: '#00A89D', gold: '#C9A84C', lightbg: '#F5F7FA',
+            muted: '#64748B', ink: '#1A2637', line: '#E2E8F0',
+          },
+          maxWidth: { layout: '1340px' },
+        },
+      },
+    };
+  </script>
 
-<body>
-  <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
-    style='font-family: Inter, "Noto Sans", sans-serif;'>
-    <div class="layout-container flex h-full grow flex-col">
-      <header
-        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
-        <div class="flex items-center gap-4 text-[#111418]">
-          <div class="size-4">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
-            </svg>
-          </div>
-          <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">Backend</h2>
-        </div>
-        <div class="flex flex-1 justify-end gap-8">
-          <div class="flex items-center gap-9"><a class="text-[#111418] text-sm font-medium leading-normal"
-              href="/demo/rest/api/index/">Demo REST API</a></div>
-          <div class="flex items-center gap-9"><a class="text-[#111418] text-sm font-medium leading-normal"
-              href="/landing/api/index/">Landing API</a></div>
-        </div>
-      </header>
-      <div class="flex items-center min-h-[90vh] p-6 bg-gray-50 dark:bg-gray-900">
+  <style>
+  /* === Animación reveal al hacer scroll === */
+  .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.revealed { opacity: 1; transform: translateY(0); }
+  /* === Punto pulsante en el hero badge === */
+  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+  /* === Flotación suave de la imagen === */
+  .animate-float { animation: float 4s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+  </style>
+</head>
 
-        <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-          <div class="flex flex-col overflow-y-auto md:flex-row">
-            <div class="h-32 md:h-auto md:w-1/2">
-              <img aria-hidden="true" class="object-cover w-full h-full dark:hidden" 
-                src="{% static '/img/team.jpg' %}"
-                alt="Office" />
-              <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block" 
-                src="{% static '/img/team.jpg' %}"
-                alt="Office" />
-            </div>
-            <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-              <div class="w-full">
-                <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                  Backend
-                </h1>
-                <p class="mb-4 text-gray-600 dark:text-gray-400">
-                  Aquí encontrarás herramientas y servicios esenciales para la gestión de datos, autenticación,
-                  procesamiento de solicitudes, y mucho más.
+<body class="font-sans text-ink bg-white antialiased overflow-x-hidden">
 
-                  Cada aplicación que forma parte de este entorno ha sido desarrollada con el objetivo de optimizar el
-                  rendimiento, la seguridad y la escalabilidad de nuestros sistemas. Ya sea que estés monitoreando
-                  servicios, accediendo a APIs o gestionando recursos, este portal es tu punto de partida.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <nav id="nav" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-line transition-shadow">
+    <div class="max-w-layout mx-auto h-[72px] px-6 lg:px-8 flex items-center justify-between">
+      <a href="#" class="text-[21px] font-extrabold text-navy tracking-tight">Django<span class="text-brand">API</span></a>
 
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#arquitectura" class="text-[13.5px] font-medium text-muted hover:text-brand transition-colors">Arquitectura</a>
+        <a href="#stack" class="text-[13.5px] font-medium text-muted hover:text-brand transition-colors">Tecnologías</a>
+        <a href="#endpoints" class="text-[13.5px] font-medium text-muted hover:text-brand transition-colors">Endpoints</a>
+        <a href="#database" class="text-[13.5px] font-medium text-muted hover:text-brand transition-colors">Base de Datos</a>
+      </div>
+
+      <a href="#probar-api" class="inline-flex items-center gap-1.5 bg-brand hover:bg-brand-light text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition shadow-sm hover:shadow-md">
+        Probar Endpoint
+      </a>
+    </div>
+  </nav>
+
+  <header class="relative isolate overflow-hidden bg-navy">
+    <div class="absolute inset-0 -z-10">
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1920&q=80"
+           alt="Código backend"
+           class="w-full h-full object-cover opacity-40" />
+      <div class="absolute inset-0 bg-navy/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-navy/30 via-transparent to-navy/90"></div>
+    </div>
+
+    <div class="max-w-layout mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-32 lg:pb-32">
+      <div class="reveal inline-flex items-center gap-2 bg-black/30 border border-white/15 text-white/95 text-[11.5px] font-semibold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6 backdrop-blur-sm shadow-inner">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+        Servidor Activo · Proyecto 06
+      </div>
+
+      <h1 class="reveal font-extrabold text-white leading-[1.1] tracking-tight max-w-2xl mb-5 text-[34px] sm:text-[44px] lg:text-[54px]">
+        Backend RESTful con <span class="text-teal">Django & Firebase</span>
+      </h1>
+
+      <p class="reveal text-[16.5px] text-white max-w-lg leading-relaxed mb-9 font-light">
+        Intermediario de datos robusto y escalable. Integra una API REST completa para facilitar la comunicación entre aplicaciones cliente y Firebase Realtime Database.
+      </p>
+
+      <div class="reveal flex flex-wrap gap-3">
+        <a href="#probar-api" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-light text-white font-semibold text-sm px-7 py-3.5 rounded-full shadow-lg transition">
+          Interactuar con la API
+        </a>
+        <a href="#endpoints" class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/25 text-white font-medium text-sm px-6 py-3.5 rounded-full backdrop-blur-sm transition">
+          Ver Documentación
+        </a>
+      </div>
+
+      <div class="reveal flex flex-wrap items-center gap-x-7 gap-y-3 mt-12 pt-7 border-t border-white/15 text-[12.5px] text-white font-medium">
+        <span class="flex items-center gap-2">✓ Arquitectura REST</span>
+        <span class="flex items-center gap-2">✓ Firebase Admin SDK</span>
+        <span class="flex items-center gap-2">✓ JSON Responses</span>
+        <span class="flex items-center gap-2">✓ Despliegue en PythonAnywhere</span>
       </div>
     </div>
-  </div>
-</body>
+  </header>
 
+  <div class="max-w-layout mx-auto grid grid-cols-1 lg:grid-cols-[1fr_360px]">
+
+    <main>
+      <section class="px-6 lg:px-13 py-12 lg:py-16 border-b border-line reveal" id="arquitectura">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="text-[11.5px] font-bold tracking-widest uppercase text-brand mb-2.5">Flujo de Datos</div>
+            <h2 class="text-2xl lg:text-[32px] font-extrabold text-navy tracking-tight leading-tight mb-4">Intermediario Seguro</h2>
+            <p class="text-[15.5px] text-muted leading-relaxed mb-5 font-light">
+              La aplicación funciona como un puente seguro. El cliente nunca toca la base de datos directamente, garantizando seguridad y validación en cada petición:
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3 text-[14px] text-navy font-medium">
+                <span class="text-brand font-bold">1.</span> El cliente envía una petición HTTP (GET, POST).
+              </li>
+              <li class="flex items-start gap-3 text-[14px] text-navy font-medium">
+                <span class="text-brand font-bold">2.</span> Django REST Framework procesa y valida la data.
+              </li>
+              <li class="flex items-start gap-3 text-[14px] text-navy font-medium">
+                <span class="text-brand font-bold">3.</span> Firebase Admin lee o escribe en Realtime Database y retorna el JSON al cliente.
+              </li>
+            </ul>
+          </div>
+          <div class="animate-float">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Servidor Backend" class="rounded-xl shadow-lg border border-line" />
+          </div>
+        </div>
+      </section>
+
+      <section class="px-6 lg:px-13 py-12 lg:py-16 bg-lightbg border-b border-line reveal" id="stack">
+        <div class="text-center mb-10">
+          <div class="text-[11.5px] font-bold tracking-widest uppercase text-brand mb-2.5">El Entorno</div>
+          <h2 class="text-2xl lg:text-[32px] font-extrabold text-navy tracking-tight leading-tight mb-4">Tecnologías Utilizadas</h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="group bg-white border border-line rounded-xl p-5 text-center shadow-sm">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="h-12 mx-auto mb-3" />
+            <div class="text-[13px] font-bold text-navy mb-0.5">Python 3</div>
+            <div class="text-[11px] text-muted">Lenguaje Base</div>
+          </div>
+          <div class="group bg-white border border-line rounded-xl p-5 text-center shadow-sm">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="h-12 mx-auto mb-3" />
+            <div class="text-[13px] font-bold text-navy mb-0.5">Django & DRF</div>
+            <div class="text-[11px] text-muted">Framework Backend</div>
+          </div>
+          <div class="group bg-white border border-line rounded-xl p-5 text-center shadow-sm">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="h-12 mx-auto mb-3" />
+            <div class="text-[13px] font-bold text-navy mb-0.5">Firebase</div>
+            <div class="text-[11px] text-muted">Realtime Database</div>
+          </div>
+          <div class="group bg-white border border-line rounded-xl p-5 text-center shadow-sm">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="h-12 mx-auto mb-3" />
+            <div class="text-[13px] font-bold text-navy mb-0.5">Tailwind CSS</div>
+            <div class="text-[11px] text-muted">Diseño Frontend</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-6 lg:px-13 py-12 lg:py-16 border-b border-line reveal" id="endpoints">
+         <div class="text-[11.5px] font-bold tracking-widest uppercase text-brand mb-2.5">Rutas Disponibles</div>
+         <h2 class="text-2xl lg:text-[32px] font-extrabold text-navy tracking-tight leading-tight mb-8">Estructura de Endpoints</h2>
+         
+         <div class="relative pl-9">
+           <div class="absolute left-2.5 top-0 bottom-0 w-0.5 rounded" style="background:linear-gradient(180deg,#0057B8,#00A89D)"></div>
+           
+           <div class="relative pb-9">
+             <div class="absolute -left-[30px] top-1 w-[22px] h-[22px] rounded-full bg-blue-500 border-[3px] border-white flex items-center justify-center shadow-md"><span class="text-[8px] font-extrabold text-white">GET</span></div>
+             <h4 class="text-base font-bold text-navy mb-1.5">/landing/api/index/</h4>
+             <p class="text-[13.5px] text-muted leading-relaxed">Obtiene todos los registros almacenados en la colección <code>landing_entries</code> de Firebase. Devuelve un objeto JSON con los nodos.</p>
+           </div>
+           
+           <div class="relative pb-9">
+             <div class="absolute -left-[30px] top-1 w-[22px] h-[22px] rounded-full bg-green-500 border-[3px] border-white flex items-center justify-center shadow-md"><span class="text-[8px] font-extrabold text-white">POST</span></div>
+             <h4 class="text-base font-bold text-navy mb-1.5">/landing/api/index/</h4>
+             <p class="text-[13.5px] text-muted leading-relaxed">Recibe un payload JSON. El servidor adjunta un <code>timestamp</code> automático y lo guarda mediante <code>ref.push()</code> en Firebase.</p>
+           </div>
+           
+           <div class="relative">
+             <div class="absolute -left-[30px] top-1 w-[22px] h-[22px] rounded-full bg-yellow-500 border-[3px] border-white flex items-center justify-center shadow-md"><span class="text-[8px] font-extrabold text-white">PUT</span></div>
+             <h4 class="text-base font-bold text-navy mb-1.5">/demo/rest/api/&lt;id&gt;</h4>
+             <p class="text-[13.5px] text-muted leading-relaxed">Demo local para actualizar o eliminar lógicamente (DELETE) registros usando identificadores UUID locales.</p>
+           </div>
+         </div>
+      </section>
+
+      <section class="px-6 lg:px-13 py-12 lg:py-16 bg-lightbg border-b border-line reveal" id="database">
+        <div class="text-[11.5px] font-bold tracking-widest uppercase text-brand mb-2.5">Fetch API GET</div>
+        <h2 class="text-2xl lg:text-[32px] font-extrabold text-navy tracking-tight leading-tight mb-4">Datos en Tiempo Real</h2>
+        <p class="text-[15.5px] text-muted leading-relaxed mb-8 font-light">
+          Estos datos están siendo consumidos directamente desde Firebase Realtime Database mediante nuestro endpoint GET.
+        </p>
+        
+        <div id="data-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="col-span-full text-center text-muted py-8 text-sm">Cargando base de datos...</div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="lg:border-l border-t lg:border-t-0 border-line bg-white pb-8 lg:shadow-[-4px_0_24px_rgba(0,0,0,.04)] z-10" id="probar-api">
+      
+      <form id="contact-form" class="p-6">
+        <h3 class="text-lg font-bold text-navy mb-4 tracking-tight">Prueba el Endpoint (POST)</h3>
+        <p class="text-xs text-muted mb-4">Envía información a la base de datos de Firebase. El backend agregará automáticamente un timestamp.</p>
+
+        <div id="form-alert" class="hidden mb-4 p-3 rounded-md text-sm font-medium"></div>
+
+        <label class="block text-xs font-bold text-navy mb-1">Tipo de Registro</label>
+        <select id="programa" name="programa" required class="w-full border border-line rounded-md px-3.5 py-2.5 text-[13.5px] bg-lightbg focus:bg-white focus:border-brand outline-none mb-4 transition">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="consulta">Consulta de API</option>
+          <option value="test">Datos de Prueba</option>
+        </select>
+        
+        <label class="block text-xs font-bold text-navy mb-1">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Usuario de Prueba" class="w-full border border-line rounded-md px-3.5 py-2.5 text-[13.5px] bg-lightbg focus:bg-white focus:border-brand outline-none mb-4 transition" />
+        
+        <label class="block text-xs font-bold text-navy mb-1">Email</label>
+        <input type="email" id="email" name="email" required placeholder="correo@ejemplo.com" class="w-full border border-line rounded-md px-3.5 py-2.5 text-[13.5px] bg-lightbg focus:bg-white focus:border-brand outline-none mb-5 transition" />
+
+        <button type="submit" id="submit-btn" class="w-full bg-brand hover:bg-brand-light text-white text-sm font-bold uppercase tracking-wider px-4 py-3.5 rounded-md shadow-[0_4px_14px_rgba(0,87,184,.3)] transition flex justify-center items-center gap-2">
+          Enviar Petición POST
+        </button>
+      </form>
+
+      <div class="px-6 pt-5 border-t border-line mt-2">
+        <div class="text-[13px] font-bold text-navy mb-3.5">Estado del Servicio</div>
+        <div class="flex flex-col gap-2.5">
+          <div class="flex items-center gap-2.5 text-ink text-[13px] font-medium">
+            <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                <span class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></span>
+            </span>
+            Django Server Activo
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="bg-navy text-white/55 px-6 lg:px-13 py-8 border-t border-white/10 text-center">
+    <div class="text-lg font-extrabold text-white tracking-tight mb-2">Proyecto<span class="text-teal">06</span></div>
+    <div class="text-[11.5px] text-white/40">
+      © 2026 Desarrollo Backend · API REST & Firebase Realtime Database
+    </div>
+  </footer>
+
+   <script type="module" src="{% static 'js/file01.js' %}"></script>
+</body>
 </html>
