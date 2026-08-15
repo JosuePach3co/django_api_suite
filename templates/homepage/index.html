@@ -29,13 +29,10 @@
   </script>
 
   <style>
-  /* === Animación reveal al hacer scroll === */
   .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.revealed { opacity: 1; transform: translateY(0); }
-  /* === Punto pulsante en el hero badge === */
   .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
   @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
-  /* === Flotación suave de la imagen === */
   .animate-float { animation: float 4s ease-in-out infinite; }
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
   </style>
@@ -54,9 +51,14 @@
         <a href="#database" class="text-[13.5px] font-medium text-muted hover:text-brand transition-colors">Base de Datos</a>
       </div>
 
-      <a href="#probar-api" class="inline-flex items-center gap-1.5 bg-brand hover:bg-brand-light text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition shadow-sm hover:shadow-md">
-        Probar Endpoint
-      </a>
+      <div class="flex items-center gap-3">
+        <a href="/demo/rest/api/index/" class="inline-flex items-center gap-1.5 bg-white border border-line hover:border-brand text-navy text-[13px] font-semibold px-4 py-2.5 rounded-full transition shadow-sm hover:shadow">
+          Demo REST API
+        </a>
+        <a href="/landing/api/index/" class="inline-flex items-center gap-1.5 bg-brand hover:bg-brand-light text-white text-[13px] font-semibold px-4 py-2.5 rounded-full transition shadow-sm hover:shadow-md">
+          Landing API
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -185,11 +187,11 @@
               <p class="text-[13.5px] text-muted leading-relaxed">Demo local para reemplazar completamente un registro, identificado por su UUID.</p>
           </div>
 
-            <div class="relative">
-              <div class="absolute -left-[30px] top-1 w-[22px] h-[22px] rounded-full bg-red-500 border-[3px] border-white flex items-center justify-center shadow-md"><span class="text-[8px] font-extrabold text-white">DEL</span></div>
-              <h4 class="text-base font-bold text-navy mb-1.5">/demo/rest/api/index/&lt;id&gt;/</h4>
-              <p class="text-[13.5px] text-muted leading-relaxed">Elimina lógicamente un registro (marca <code>is_active</code> como <code>false</code>), preservando el historial.</p>
-            </div>
+             <div class="relative">
+               <div class="absolute -left-[30px] top-1 w-[22px] h-[22px] rounded-full bg-red-500 border-[3px] border-white flex items-center justify-center shadow-md"><span class="text-[8px] font-extrabold text-white">DEL</span></div>
+               <h4 class="text-base font-bold text-navy mb-1.5">/demo/rest/api/index/&lt;id&gt;/</h4>
+               <p class="text-[13.5px] text-muted leading-relaxed">Elimina lógicamente un registro (marca <code>is_active</code> como <code>false</code>), preservando el historial.</p>
+             </div>
          </div>
       </section>
 
