@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 
 from firebase_admin import db
 from rest_framework import status
@@ -33,7 +33,8 @@ class LandingAPI(APIView):
             ref = db.reference(f"{self.collection_name}")
 
             # Obtener la fecha y hora actual y formatearla según especificación
-            current_time = datetime.now()
+            # Obtener la fecha y hora actual usando la zona horaria de settings.py
+            current_time = timezone.localtime()
             custom_format = (
                 current_time.strftime("%d/%m/%Y, %I:%M:%S %p")
                 .lower()
