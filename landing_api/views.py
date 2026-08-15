@@ -26,8 +26,22 @@ class LandingAPI(APIView):
     def post(self, request):
         try:
             data = dict(request.data) if request.data is not None else {}
-            if not data:
-                return Response({"error": "No data provided."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Validación de campos obligatorios
+            required_fields = ['nombre', 'email', 'programa']
+            missing_fields = []
+            
+            for field in required_fields:
+                # Comprueba si el campo no existe o si es una cadena de texto vacía
+                if field not in data or not str(data.get(field, '')).strip():
+                    missing_fields.append(field)
+            
+            # Si falta algún campo, detenemos el proceso y devolvemos un error 400
+            if missing_fields:
+                return Response(
+                    {"error": f"Faltan campos obligatorios o están vacíos: {', '.join(missing_fields)}"}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
             # Referencia a la colección
             ref = db.reference(f"{self.collection_name}")
