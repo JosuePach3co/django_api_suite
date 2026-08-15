@@ -38,8 +38,17 @@ class DemoRestApi(APIView):
 
 class DemoRestApiItem(APIView):
     """
-    Vista para manejar operaciones sobre un recurso específico (PUT, PATCH, DELETE).
+    Vista para manejar operaciones sobre un recurso específico (GET, PUT, PATCH, DELETE).
     """
+
+    def get(self, request, item_id):
+        # 1. Buscar el elemento por su id (y que esté activo)
+        item = next((item for item in data_list if item['id'] == item_id and item.get('is_active', False)), None)
+        
+        if not item:
+            return Response({'error': 'Elemento no encontrado o inactivo.'}, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({'data': item}, status=status.HTTP_200_OK)
 
     def put(self, request, item_id):
         # 1. Buscar el elemento por su id (y que esté activo)
