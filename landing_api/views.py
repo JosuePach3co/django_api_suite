@@ -46,7 +46,6 @@ class LandingAPI(APIView):
             # Referencia a la colección
             ref = db.reference(f"{self.collection_name}")
 
-            # Obtener la fecha y hora actual y formatearla según especificación
             # Obtener la fecha y hora actual usando la zona horaria de settings.py
             current_time = timezone.localtime()
             custom_format = (
@@ -87,11 +86,45 @@ class LandingAPIDetail(APIView):
             return Response({"error": str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def put(self, request, pk):
-        """Actualiza un registro específico"""
+        """Reemplazo total de un registro específico (PUT)"""
         try:
             data = dict(request.data) if request.data is not None else {}
             if not data:
                 return Response({"error": "No data provided."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Validación de campos obligatorios para el reemplazo total
+            required_fields = ['nombre', 'email', 'programa']
+            missing_fields = [field for field in required_fields if field not in data or not str(data.get(field, '')).strip()]
+            
+            if missing_fields:
+                return Response(
+                    {"error": f"Faltan campos requeridos para el reemplazo total: {', '.join(missing_fields)}"}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            ref = db.reference(f"{self.collection_name}/{pk}")
+            existing_data = ref.get()
+            
+            # Verificamos si existe antes de actualizar
+            if not existing_data:
+                return Response({"error": "Registro no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
+            # Preservar el timestamp original para no perderlo al hacer un reemplazo total
+            if 'timestamp' not in data and 'timestamp' in existing_data:
+                data['timestamp'] = existing_data['timestamp']
+
+            # set() reemplaza todo el nodo de la base de datos con la nueva data
+            ref.set(data)
+            return Response({"message": "Registro reemplazado exitosamente."}, status=status.HTTP_200_OK)
+        except Exception as error:
+            return Response({"error": str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def patch(self, request, pk):
+        """Actualización parcial de un registro específico (PATCH)"""
+        try:
+            data = dict(request.data) if request.data is not None else {}
+            if not data:
+                return Response({"error": "No data provided para actualizar."}, status=status.HTTP_400_BAD_REQUEST)
 
             ref = db.reference(f"{self.collection_name}/{pk}")
             
@@ -99,9 +132,9 @@ class LandingAPIDetail(APIView):
             if not ref.get():
                 return Response({"error": "Registro no encontrado."}, status=status.HTTP_404_NOT_FOUND)
 
-            # update() modifica solo los campos enviados sin borrar el resto
+            # update() modifica solo los campos enviados sin borrar el resto del nodo
             ref.update(data)
-            return Response({"message": "Registro actualizado exitosamente."}, status=status.HTTP_200_OK)
+            return Response({"message": "Registro actualizado parcialmente exitosamente."}, status=status.HTTP_200_OK)
         except Exception as error:
             return Response({"error": str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
