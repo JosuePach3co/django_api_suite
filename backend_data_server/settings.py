@@ -29,7 +29,12 @@ SECRET_KEY = "django-insecure-4u)3b5iv#lp26$uu1s!n+)(d56mej4+qo8i6b_sc^b_u%r6&c$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pablochacon.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "[::1]",
+    "pablochacon.pythonanywhere.com",
+]
 
 
 # Application definition
